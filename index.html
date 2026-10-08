@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OverLay++: a dense, overlap-aware dataset for layout-to-image generation.">
+  <title>OverLay++: Dense-Overlap Layout-to-Image Generation Dataset</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=table-pairs-18">
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item brand-name" href="#top"><span class="brand-mark" aria-hidden="true"></span>OverLay<span class="brand-plus">++</span></a>
+      <button type="button" class="navbar-burger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="#video-section">Video</a>
+        <a class="navbar-item" href="#abstract-section">Abstract</a>
+        <a class="navbar-item" href="#method-section">Method</a>
+        <a class="navbar-item" href="#results-section">Key Results</a>
+        <a class="navbar-item" href="#citation-section">Citation</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="has-text-centered">
+          <div class="publication-venue">NeurIPS 2026 <span>Evaluations &amp; Datasets Track</span></div>
+          <h1 class="title is-1 publication-title"><span class="project-name">OverLay<span>++</span></span><span class="project-subtitle">Dense-Overlap Layout-to-Image Generation Dataset</span></h1>
+          <div class="publication-authors">
+            <span class="author-block"><a href="https://www.linkedin.com/in/shivanshagg/">Shivansh Aggarwal</a><sup>*</sup>,</span>
+            <span class="author-block"><a href="https://shroglck.github.io/">Shresth Grover</a><sup>*</sup>,</span>
+            <span class="author-block"><a href="https://dsrivastavv.github.io/">Divyansh Srivastava</a><sup>*</sup>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=ds8ZvyMAAAAJ&hl=en">Haiyang Xu</a>,</span>
+            <span class="author-block"><a href="https://www.bingnanli.com/">Bingnan Li</a>,</span>
+            <span class="author-block"><a href="https://xzhang.dev/">Xiang Zhang</a>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=LE6bioEAAAAJ&hl=en">Ethan J. Armand</a>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=hoZesOwAAAAJ&hl=en">Chuan Li</a>,</span>
+            <span class="author-block"><a href="https://people.stat.ucla.edu/jxie/">Jianwen Xie</a>,</span>
+            <span class="author-block"><a href="https://pages.ucsd.edu/~ztu/">Zhuowen Tu</a></span>
+          </div>
+          <p class="author-note">* Equal contribution</p>
+          <div class="hero-links">
+            <a class="button is-normal is-rounded is-dark" href="https://arxiv.org/abs/2610.09071">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg><span>Read the paper</span>
+            </a>
+            <a class="button is-normal is-rounded is-dark" href="https://huggingface.co/datasets/mlpcucsd/OverLayPP">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><span>Explore dataset</span>
+            </a>
+            <a class="button is-normal is-rounded is-dark" href="https://github.com/mlpc-ucsd/OverLayPP">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-16-2 20"/></svg><span>View code</span>
+            </a>
+          </div>
+          <div class="dataset-stats" aria-label="Dataset highlights">
+            <div><strong>500K</strong><span>Images</span></div>
+            <div><strong>6.6</strong><span>Objects per image</span></div>
+            <div><strong>1.67×</strong><span>Annotation density</span></div>
+            <div><strong>&gt; 6×</strong><span>Object caption length</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-less-padding">
+    <div class="container is-max-desktop">
+      <figure class="paper-figure">
+        <a class="figure-image-link" href="web-assets/teaser.png" target="_blank" rel="noopener" aria-label="Open figure at full size"><img src="web-assets/teaser.png" alt="OverLay++ teaser: dense annotations, dataset statistics, and generated examples"></a>
+        <a class="figure-fullsize" href="web-assets/teaser.png" target="_blank" rel="noopener">View full size ↗</a>
+        <figcaption><strong class="caption-label">Figure 1:</strong> <strong>OverLay++: A dense and overlap-aware dataset for Layout-to-Image generation.</strong> Left: OverLay++ provides dense object annotations with rich local captions for fine-grained spatial and attribute control. Center: Our dataset contains 500K images with 6.6 objects per image, yielding denser annotations and richer captions. Right: Training on OverLay++ improves generation quality in dense and overlapping scenes, producing better object fidelity and spatial alignment.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section-less-padding" id="video-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Video</h2>
+      <div class="publication-video">
+        <iframe src="https://www.youtube.com/embed/1GfSTYlKpSo" title="OverLay++ project video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-less-padding" id="abstract-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Abstract</h2>
+      <div class="content has-text-justified">
+        <p>Layout-to-Image generation has made substantial progress in spatial and object-level control. However, existing methods still struggle with complex scenes containing many overlapping and interacting objects. We argue that training data is a particular bottleneck: existing datasets lack examples with dense, complex object interactions. To address this gap, we introduce <strong>OverLay++</strong>, a large-scale Layout-to-Image dataset with structurally complex scenes. OverLay++ contains <strong>approximately 500K images</strong> with an average of <strong>6.6 objects per image</strong>, exceeding existing datasets by <strong>1.67×</strong> in annotation density. Beyond annotation density, OverLay++ provides rich semantic detail with object captions <strong>over six times longer</strong> than in current datasets. Our dataset generation pipeline is simple and produces dense, overlapping object annotations with rich per-object captions. Across multiple benchmarks, state-of-the-art Layout-to-Image methods trained on the OverLay++ dataset show consistent improvement and faster convergence, demonstrating the importance of dense, overlap-aware, and caption-rich supervision for controllable image generation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-less-padding" id="method-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Method</h2>
+      <div class="content has-text-justified">
+        <p>We construct OverLay++ from the LAION-Aesthetics V2 4.75 subset using a four-stage pipeline: <strong>image filtering</strong>, <strong>object detection</strong>, <strong>scene filtering</strong>, and <strong>hierarchical captioning</strong>. The pipeline prompts a vision-language model to produce overlapping object proposals, then applies per-object grounded validation to keep only accurate detections. Each retained image receives <em>short and long captions</em> at both the scene and object levels.</p>
+      </div>
+      <figure class="paper-figure">
+        <a class="figure-image-link" href="web-assets/pipeline.png" target="_blank" rel="noopener" aria-label="Open figure at full size"><img src="web-assets/pipeline.png" alt="Four-stage OverLay++ dataset generation pipeline"></a>
+        <a class="figure-fullsize" href="web-assets/pipeline.png" target="_blank" rel="noopener">View full size ↗</a>
+        <figcaption><strong class="caption-label">Figure 2:</strong> <strong>Dataset generation pipeline for the OverLay++ dataset.</strong> Four stages: (I) image filtering via aesthetics, resolution, and center cropping; (II) object detection for bounding boxes and labels; (III) scene filtering to remove low-quality or inconsistent samples, and (IV) hierarchical captioning producing scene-level and object-level captions (long and short).</figcaption>
+      </figure>
+
+      <h3 class="table-title">Dataset Statistics</h3>
+      <div class="table-container">
+        <table class="table is-fullwidth paper-table">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Images</th>
+              <th>Objects ↑</th>
+              <th>IoU ↑</th>
+              <th>Dist ↓</th>
+              <th>Local short ↑</th>
+              <th>Local long ↑</th>
+              <th>Global short ↑</th>
+              <th>Global long ↑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LayoutSAM</td>
+              <td><u>2.66M</u></td>
+              <td><u>3.93</u></td>
+              <td>0.22</td>
+              <td><u>0.22</u></td>
+              <td>1.99</td>
+              <td><u>11.93</u></td>
+              <td>—</td>
+              <td><strong>81.81</strong></td>
+            </tr>
+            <tr>
+              <td>EliGen</td>
+              <td>496K</td>
+              <td>2.56</td>
+              <td><u>0.26</u></td>
+              <td>0.24</td>
+              <td>2.12</td>
+              <td>—</td>
+              <td><u>17.76</u></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>GRIT</td>
+              <td><strong>20.5M</strong></td>
+              <td>1.78</td>
+              <td>0.16</td>
+              <td>0.25</td>
+              <td><u>2.40</u></td>
+              <td>—</td>
+              <td>17.47</td>
+              <td>—</td>
+            </tr>
+            <tr class="ours">
+              <td>OverLay++ dataset</td>
+              <td>500K</td>
+              <td><strong>6.59</strong></td>
+              <td><strong>0.31</strong></td>
+              <td><strong>0.17</strong></td>
+              <td><strong>15.89</strong></td>
+              <td><strong>89.70</strong></td>
+              <td><strong>19.98</strong></td>
+              <td><u>52.24</u></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption"><strong class="caption-label">Table 1:</strong> <strong>Dataset statistics for Layout-to-Image datasets.</strong> Our dataset has higher object density, stronger spatial interactions, and richer caption supervision than prior datasets. Caption lengths are measured in number of words. <strong>Bold</strong> and <u>underline</u> mark the best and second-best values in each column.</p>
+    </div>
+  </section>
+
+  <section class="section section-less-padding" id="results-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Key Results</h2>
+      <section class="result-block result-blue" aria-labelledby="result-quality">
+        <div class="result-strip">
+          <h3 class="result-tag" id="result-quality">Result 1 — Improved Visual Coherence and Object Fidelity</h3>
+          <p class="result-summary">Models trained on the OverLay++ dataset produce <strong>more coherent and detailed images</strong> than those trained on prior datasets.</p>
+        </div>
+        <figure class="paper-figure result-panel">
+          <a class="figure-image-link" href="web-assets/comparison.png" target="_blank" rel="noopener" aria-label="Open figure at full size"><img src="web-assets/comparison.png" alt="Qualitative comparison of models trained on EliGen and OverLay++"></a>
+        <a class="figure-fullsize" href="web-assets/comparison.png" target="_blank" rel="noopener">View full size ↗</a>
+          <figcaption><strong class="caption-label">Figure 3:</strong> <strong>Qualitative comparison of L2I generation.</strong> Models trained on OverLay++ produce more coherent and detailed images than those trained on prior datasets. Common failure cases of prior datasets include missing objects, missing attributes, and poor handling of dense object layouts.</figcaption>
+        </figure>
+      </section>
+
+      <section class="result-block result-green" aria-labelledby="result-layoutsam">
+        <div class="result-strip">
+          <h3 class="result-tag" id="result-layoutsam">Result 2 — Improved Attribute Alignment and Image Quality</h3>
+          <p class="result-summary">On <strong>LayoutSAM-Eval</strong>, EliGen-SD3 trained on the OverLay++ dataset achieves state-of-the-art region-wise quality.</p>
+        </div>
+        <div class="result-panel">
+          <div class="table-container">
+            <table class="table is-fullwidth paper-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Spatial (%) ↑</th>
+                  <th>Color (%) ↑</th>
+                  <th>Texture (%) ↑</th>
+                  <th>Shape (%) ↑</th>
+                  <th>FID ↓</th>
+                  <th>IS ↑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>GLIGEN</td><td>77.53</td><td>49.41</td><td>55.29</td><td>52.72</td><td>21.92</td><td>20.57</td></tr>
+                <tr><td>Ranni</td><td>41.38</td><td>24.10</td><td>25.57</td><td>23.35</td><td>27.24</td><td>19.81</td></tr>
+                <tr><td>MIGC</td><td>85.66</td><td>66.97</td><td>71.24</td><td>69.06</td><td>21.19</td><td>19.65</td></tr>
+                <tr><td>InstanceDiff</td><td>87.99</td><td>69.16</td><td>72.78</td><td>71.08</td><td>19.67</td><td>20.02</td></tr>
+                <tr><td>Be Yourself</td><td>53.99</td><td>31.73</td><td>35.26</td><td>32.75</td><td>28.10</td><td>17.98</td></tr>
+                <tr><td>HiCo</td><td>87.04</td><td>69.19</td><td>72.36</td><td>71.10</td><td>22.61</td><td>20.15</td></tr>
+                <tr class="comparison-baseline"><td>SiamLayout-SD3</td><td>92.67</td><td>74.45</td><td>77.21</td><td>75.93</td><td><u>19.10</u></td><td><strong>22.04</strong></td></tr>
+                <tr class="ours comparison-trained">
+                  <td>SiamLayout-SD3 (OverLay++ dataset)</td>
+                  <td><u>93.30</u> <span class="gain">(+0.68%)</span></td>
+                  <td>75.99 <span class="gain">(+2.07%)</span></td>
+                  <td>78.77 <span class="gain">(+2.02%)</span></td>
+                  <td>78.41 <span class="gain">(+3.27%)</span></td>
+                  <td><strong>17.96</strong> <span class="gain">(-5.97%)</span></td>
+                  <td><u>21.60</u></td>
+                </tr>
+                <tr class="comparison-baseline"><td>EliGen-SD3</td><td>93.04</td><td><u>82.96</u></td><td><u>86.73</u></td><td><u>86.35</u></td><td>25.17</td><td>19.21</td></tr>
+                <tr class="ours comparison-trained">
+                  <td>EliGen-SD3 (OverLay++ dataset)</td>
+                  <td><strong>95.45</strong> <span class="gain">(+2.59%)</span></td>
+                  <td><strong>90.03</strong> <span class="gain">(+8.52%)</span></td>
+                  <td><strong>93.14</strong> <span class="gain">(+7.39%)</span></td>
+                  <td><strong>92.81</strong> <span class="gain">(+7.48%)</span></td>
+                  <td>19.61 <span class="gain">(-22.09%)</span></td>
+                  <td>19.54 <span class="gain">(+1.72%)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption"><strong class="caption-label">Table 2:</strong> <strong>Results on LayoutSAM-Eval</strong>. Comparison of region-wise and global quality across different methods. Our methods consistently outperform their corresponding baselines, achieving substantial gains in region-wise quality while maintaining competitive global image quality. Improvements over baseline are shown in <span class="gain">green</span>, and <strong>bold</strong> and <u>underline</u> denote the best and second-best results among all compared methods.</p>
+
+        </div>
+      </section>
+
+      <section class="result-block result-gold" aria-labelledby="result-overlap">
+        <div class="result-strip">
+          <h3 class="result-tag" id="result-overlap">Result 3 — Improved Spatial Alignment in Overlapping Layouts</h3>
+          <p class="result-summary">Training on the OverLay++ dataset improves both EliGen-SD3 and SiamLayout-SD3 on <strong>OverLayBench</strong> benchmark across the Simple, Regular, and Complex splits.</p>
+        </div>
+        <div class="result-panel">
+
+          <h4 class="split-title">Simple</h4>
+          <div class="table-container">
+            <table class="table is-fullwidth paper-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>mIoU ↑</th>
+                  <th>O-mIoU ↑</th>
+                  <th>SR<sub>E</sub> ↑</th>
+                  <th>SR<sub>R</sub> ↑</th>
+                  <th>CLIP<sub>G</sub> ↑</th>
+                  <th>CLIP<sub>L</sub> ↑</th>
+                  <th>FID ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>GLIGEN</td><td>60.54</td><td>36.22</td><td>49.99</td><td>78.72</td><td>34.17</td><td>24.75</td><td>31.27</td></tr>
+                <tr><td>InstanceDiff</td><td><strong>71.21</strong></td><td><strong>49.99</strong></td><td>77.71</td><td>87.49</td><td>34.25</td><td>27.69</td><td>36.17</td></tr>
+                <tr><td>MIGC</td><td>58.64</td><td>32.15</td><td>63.41</td><td>81.60</td><td>33.07</td><td>26.49</td><td>31.64</td></tr>
+                <tr><td>HiCo</td><td>69.47</td><td><u>47.23</u></td><td>67.75</td><td>86.08</td><td>35.25</td><td>27.04</td><td>29.21</td></tr>
+                <tr><td>3DIS</td><td>65.75</td><td>38.38</td><td><u>86.24</u></td><td>86.98</td><td>35.85</td><td><strong>29.67</strong></td><td>29.18</td></tr>
+                <tr class="comparison-baseline"><td>SiamLayout-SD3</td><td>58.78</td><td>32.52</td><td>72.34</td><td>84.45</td><td><strong>37.29</strong></td><td>27.49</td><td><u>27.51</u></td></tr>
+                <tr class="ours comparison-trained">
+                  <td>SiamLayout-SD3 (OverLay++ dataset)</td>
+                  <td>61.01 <span class="gain">(+3.79%)</span></td>
+                  <td>37.23 <span class="gain">(+14.48%)</span></td>
+                  <td>75.19 <span class="gain">(+3.94%)</span></td>
+                  <td>85.60 <span class="gain">(+1.36%)</span></td>
+                  <td><u>37.03</u></td>
+                  <td>27.59 <span class="gain">(+0.36%)</span></td>
+                  <td><strong>26.73</strong> <span class="gain">(-2.84%)</span></td>
+                </tr>
+                <tr class="comparison-baseline"><td>EliGen-SD3</td><td>66.67</td><td>41.34</td><td>85.70</td><td><u>88.67</u></td><td>37.01</td><td>28.57</td><td>30.29</td></tr>
+                <tr class="ours comparison-trained">
+                  <td>EliGen-SD3 (OverLay++ dataset)</td>
+                  <td><u>70.39</u> <span class="gain">(+5.58%)</span></td>
+                  <td>47.09 <span class="gain">(+13.91%)</span></td>
+                  <td><strong>91.83</strong> <span class="gain">(+7.15%)</span></td>
+                  <td><strong>91.06</strong> <span class="gain">(+2.70%)</span></td>
+                  <td>36.27</td>
+                  <td><u>29.15</u> <span class="gain">(+2.03%)</span></td>
+                  <td>30.28 <span class="gain">(-0.03%)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 class="split-title">Regular</h4>
+          <div class="table-container">
+            <table class="table is-fullwidth paper-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>mIoU ↑</th>
+                  <th>O-mIoU ↑</th>
+                  <th>SR<sub>E</sub> ↑</th>
+                  <th>SR<sub>R</sub> ↑</th>
+                  <th>CLIP<sub>G</sub> ↑</th>
+                  <th>CLIP<sub>L</sub> ↑</th>
+                  <th>FID ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>GLIGEN</td><td>52.46</td><td>26.53</td><td>44.88</td><td>77.46</td><td>33.93</td><td>23.42</td><td>52.22</td></tr>
+                <tr><td>InstanceDiff</td><td><u>60.08</u></td><td><u>34.15</u></td><td>72.51</td><td>83.36</td><td>33.09</td><td>26.19</td><td>59.73</td></tr>
+                <tr><td>MIGC</td><td>47.42</td><td>20.06</td><td>56.67</td><td>77.85</td><td>32.72</td><td>24.99</td><td>54.24</td></tr>
+                <tr><td>HiCo</td><td>55.02</td><td>29.60</td><td>58.24</td><td>79.89</td><td>33.91</td><td>25.34</td><td>49.07</td></tr>
+                <tr><td>3DIS</td><td>55.66</td><td>27.29</td><td>80.80</td><td><u>83.69</u></td><td>35.42</td><td><u>28.12</u></td><td>48.56</td></tr>
+                <tr class="comparison-baseline"><td>SiamLayout-SD3</td><td>47.04</td><td>20.67</td><td>62.60</td><td>78.31</td><td><strong>36.67</strong></td><td>25.55</td><td><u>45.57</u></td></tr>
+                <tr class="ours comparison-trained">
+                  <td>SiamLayout-SD3 (OverLay++ dataset)</td>
+                  <td>48.41 <span class="gain">(+2.91%)</span></td>
+                  <td>23.32 <span class="gain">(+12.82%)</span></td>
+                  <td>65.53 <span class="gain">(+4.68%)</span></td>
+                  <td>80.39 <span class="gain">(+2.66%)</span></td>
+                  <td>36.49</td>
+                  <td>25.66 <span class="gain">(+0.43%)</span></td>
+                  <td><strong>45.37</strong> <span class="gain">(-0.44%)</span></td>
+                </tr>
+                <tr class="comparison-baseline"><td>EliGen-SD3</td><td>56.79</td><td>29.24</td><td><u>81.34</u></td><td>83.57</td><td><u>36.54</u></td><td>27.20</td><td>49.15</td></tr>
+                <tr class="ours comparison-trained">
+                  <td>EliGen-SD3 (OverLay++ dataset)</td>
+                  <td><strong>62.40</strong> <span class="gain">(+9.88%)</span></td>
+                  <td><strong>36.66</strong> <span class="gain">(+25.38%)</span></td>
+                  <td><strong>89.45</strong> <span class="gain">(+9.97%)</span></td>
+                  <td><strong>86.75</strong> <span class="gain">(+3.81%)</span></td>
+                  <td>35.64</td>
+                  <td><strong>28.17</strong> <span class="gain">(+3.57%)</span></td>
+                  <td>49.09 <span class="gain">(-0.12%)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 class="split-title">Complex</h4>
+          <div class="table-container">
+            <table class="table is-fullwidth paper-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>mIoU ↑</th>
+                  <th>O-mIoU ↑</th>
+                  <th>SR<sub>E</sub> ↑</th>
+                  <th>SR<sub>R</sub> ↑</th>
+                  <th>CLIP<sub>G</sub> ↑</th>
+                  <th>CLIP<sub>L</sub> ↑</th>
+                  <th>FID ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>GLIGEN</td><td>50.79</td><td>23.85</td><td>41.70</td><td>79.93</td><td>33.92</td><td>22.75</td><td>57.32</td></tr>
+                <tr><td>InstanceDiff</td><td><u>53.68</u></td><td><u>25.63</u></td><td>66.02</td><td>80.34</td><td>32.33</td><td>25.53</td><td>66.32</td></tr>
+                <tr><td>MIGC</td><td>40.04</td><td>13.26</td><td>47.80</td><td>74.48</td><td>31.93</td><td>24.20</td><td>66.52</td></tr>
+                <tr><td>HiCo</td><td>46.56</td><td>20.35</td><td>48.88</td><td>75.19</td><td>33.15</td><td>24.41</td><td>55.78</td></tr>
+                <tr><td>3DIS</td><td>50.65</td><td>21.75</td><td><u>74.31</u></td><td>81.57</td><td>35.11</td><td><strong>27.35</strong></td><td>54.90</td></tr>
+                <tr class="comparison-baseline"><td>SiamLayout-SD3</td><td>44.24</td><td>18.05</td><td>52.10</td><td>79.98</td><td><strong>36.55</strong></td><td>24.76</td><td><u>53.29</u></td></tr>
+                <tr class="ours comparison-trained">
+                  <td>SiamLayout-SD3 (OverLay++ dataset)</td>
+                  <td>45.81 <span class="gain">(+3.55%)</span></td>
+                  <td>20.42 <span class="gain">(+13.13%)</span></td>
+                  <td>57.54 <span class="gain">(+10.44%)</span></td>
+                  <td>81.60 <span class="gain">(+2.03%)</span></td>
+                  <td>36.15</td>
+                  <td>24.97 <span class="gain">(+0.85%)</span></td>
+                  <td><strong>52.21</strong> <span class="gain">(-2.03%)</span></td>
+                </tr>
+                <tr class="comparison-baseline"><td>EliGen-SD3</td><td>50.53</td><td>22.97</td><td>73.75</td><td><u>82.22</u></td><td><u>36.49</u></td><td>26.32</td><td>53.58</td></tr>
+                <tr class="ours comparison-trained">
+                  <td>EliGen-SD3 (OverLay++ dataset)</td>
+                  <td><strong>57.90</strong> <span class="gain">(+14.59%)</span></td>
+                  <td><strong>30.99</strong> <span class="gain">(+34.92%)</span></td>
+                  <td><strong>83.30</strong> <span class="gain">(+12.95%)</span></td>
+                  <td><strong>85.59</strong> <span class="gain">(+4.10%)</span></td>
+                  <td>35.46</td>
+                  <td><u>26.97</u> <span class="gain">(+2.47%)</span></td>
+                  <td>53.63</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption"><strong class="caption-label">Table 3:</strong> <strong>Results on OverLayBench</strong>. Comparison of generation quality across different methods and complexity settings. Our methods consistently outperform their corresponding baselines, achieving substantial gains in region-aware metrics while maintaining competitive overall image fidelity. Improvements over the baseline are shown in <span class="gain">green</span>, and <strong>bold</strong> and <u>underline</u> indicate the best and second-best results among all compared methods.</p>
+
+        </div>
+      </section>
+
+      <section class="result-block result-gray" aria-labelledby="result-dense">
+        <div class="result-strip">
+          <h3 class="result-tag" id="result-dense">Result 4 — Improved Generation Quality in Dense Scenes</h3>
+          <p class="result-summary">Training on the OverLay++ dataset improves both EliGen-SD3 and SiamLayout-SD3 on <strong>DenseLayout</strong> benchmark.</p>
+        </div>
+        <div class="result-panel">
+          <div class="table-container">
+            <table class="table is-fullwidth paper-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>mIoU (%) ↑</th>
+                  <th>Color (%) ↑</th>
+                  <th>Texture (%) ↑</th>
+                  <th>Shape (%) ↑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="comparison-baseline"><td>EliGen-SD3</td><td>45.79</td><td>37.65</td><td>39.98</td><td>39.76</td></tr>
+                <tr class="ours comparison-trained">
+                  <td>EliGen-SD3 (OverLay++ dataset)</td>
+                  <td><strong>46.92</strong> <span class="gain">(+2.47%)</span></td>
+                  <td><strong>40.61</strong> <span class="gain">(+7.86%)</span></td>
+                  <td><strong>42.91</strong> <span class="gain">(+7.33%)</span></td>
+                  <td><strong>42.82</strong> <span class="gain">(+7.70%)</span></td>
+                </tr>
+                <tr class="comparison-baseline"><td>SiamLayout-SD3</td><td>15.54</td><td>11.69</td><td>12.34</td><td>12.17</td></tr>
+                <tr class="ours comparison-trained">
+                  <td>SiamLayout-SD3 (OverLay++ dataset)</td>
+                  <td>17.10 <span class="gain">(+10.04%)</span></td>
+                  <td>13.15 <span class="gain">(+12.49%)</span></td>
+                  <td>13.77 <span class="gain">(+11.59%)</span></td>
+                  <td>13.61 <span class="gain">(+11.83%)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption"><strong class="caption-label">Table 4:</strong> <strong>Results on DenseLayout</strong>. EliGen-SD3 and SiamLayout-SD3 trained on OverLay++ outperform their corresponding baselines on DenseLayout benchmark. Improvements over baselines are highlighted in <span class="gain">green</span>, and <strong>bold</strong> indicates the best results among all compared methods.</p>
+
+        </div>
+      </section>
+
+      <section class="result-block result-purple" aria-labelledby="result-convergence">
+        <div class="result-strip">
+          <h3 class="result-tag" id="result-convergence">Result 5 — Accelerated Training Convergence</h3>
+          <p class="result-summary">Training on the OverLay++ dataset accelerates convergence across all <strong>OverLayBench</strong> splits.</p>
+        </div>
+        <div class="result-panel">
+          <div class="convergence-grid">
+            <figure class="paper-figure">
+              <img src="web-assets/convergence_simple.png" alt="Convergence on the OverLayBench Simple split">
+              <figcaption>(a) Simple</figcaption>
+            </figure>
+            <figure class="paper-figure">
+              <img src="web-assets/convergence_medium.png" alt="Convergence on the OverLayBench Regular split">
+              <figcaption>(b) Regular</figcaption>
+            </figure>
+            <figure class="paper-figure">
+              <img src="web-assets/convergence_hard.png" alt="Convergence on the OverLayBench Complex split">
+              <figcaption>(c) Complex</figcaption>
+            </figure>
+          </div>
+          <p class="full-width-caption"><strong class="caption-label">Figure 4:</strong> <strong>Convergence analysis.</strong> Comparison of <em>mIoU</em> and <em>O-mIoU</em> versus training steps for Simple, Regular, and Complex settings. The model trained on OverLay++ achieves higher scores across all difficulty levels and demonstrates stable convergence behavior.</p>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="section section-less-padding" id="citation-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Citation</h2>
+      <p class="table-lead">If you find OverLay++ useful, please consider citing:</p>
+      <div class="bibtex-wrap">
+        <button class="copy-button" type="button" aria-label="Copy BibTeX citation" title="Copy citation">
+          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>
+          <svg class="copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
+        </button>
+        <span class="copy-status visually-hidden" aria-live="polite"></span>
+        <pre><code id="bibtex">@misc{aggarwal2026overlaydenseoverlaplayouttoimagegeneration,
+  title={OverLay++: Dense-Overlap Layout-to-Image Generation Dataset},
+  author={Shivansh Aggarwal and Shresth Grover and Divyansh Srivastava and Haiyang Xu and Bingnan Li and Xiang Zhang and Ethan J. Armand and Chuan Li and Jianwen Xie and Zhuowen Tu},
+  year={2026},
+  eprint={2610.09071},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2610.09071},
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-less-padding" id="acknowledgements-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Acknowledgment</h2>
+      <div class="content has-text-justified">
+        <p>This work is supported by U.S. National Science Foundation Award IIS-2433768 and IIS-2127544. This work also used Delta and DeltaAI at National Center for Supercomputing Applications (NCSA) through allocation CIS260179 from the Advanced Cyberinfrastructure Coordination Ecosystem: Services &amp; Support (ACCESS) program, which is supported by U.S. National Science Foundation grants #2138259, #2138286, #2138307, #2137603, and #2138296. We also thank Lambda, Inc. for their valuable compute resource help.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const menuButton = document.querySelector('.navbar-burger');
+    const menu = document.getElementById('navMenu');
+    function setMenu(open) {
+      menuButton.classList.toggle('is-active', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('is-active', open);
+    }
+    menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        menuButton.focus();
+      }
+    });
+
+    document.querySelector('.copy-button').addEventListener('click', async function () {
+      const status = document.querySelector('.copy-status');
+      try {
+        await navigator.clipboard.writeText(document.getElementById('bibtex').textContent);
+        this.dataset.state = 'copied';
+        this.title = 'Citation copied';
+        status.textContent = 'Citation copied';
+      } catch {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(document.getElementById('bibtex'));
+        selection.removeAllRanges();
+        selection.addRange(range);
+        this.dataset.state = 'selected';
+        this.title = 'Citation selected; copy the selected text';
+        status.textContent = 'Citation selected; copy the selected text';
+      }
+      setTimeout(() => {
+        delete this.dataset.state;
+        this.title = 'Copy citation';
+        status.textContent = '';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

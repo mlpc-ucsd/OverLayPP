@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Data / models / caches (do not commit large artifacts)
+*.parquet
+*.jsonl
+*.json.gz
+hf_cache/
+.cache/
+
+# Common pipeline outputs
+dataset/
+images/
+images_overlayed/
+metadata/
+combined_metadata.jsonl
+aesthetics_extracted/

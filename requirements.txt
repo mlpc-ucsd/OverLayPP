@@ -1,0 +1,12 @@
+vllm==0.17.0
+torch==2.10.0
+torchvision==0.25.0
+transformers==4.57.6
+qwen-vl-utils==0.0.14
+accelerate==1.13.0
+datasets==4.7.0
+pandas==2.2.3
+pyarrow==21.0.0
+pillow==11.2.1
+requests==2.32.4
+tqdm==4.67.1

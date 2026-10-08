@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "overlaypp"
+version = "0.1.0"
+description = "Dense-overlap layout-to-image generation dataset pipeline."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "vllm==0.17.0",
+    "torch==2.10.0",
+    "torchvision==0.25.0",
+    "transformers==4.57.6",
+    "qwen-vl-utils==0.0.14",
+    "accelerate==1.13.0",
+    "datasets==4.7.0",
+    "pandas==2.2.3",
+    "pyarrow==21.0.0",
+    "pillow==11.2.1",
+    "requests==2.32.4",
+    "tqdm==4.67.1",
+]
+
+[project.scripts]
+overlaypp-download-dataset = "overlaypp.download_dataset:main"
+overlaypp-filter-images = "overlaypp.filter_images:main"
+overlaypp-detect = "overlaypp.detect_objects:main"
+overlaypp-filter-scenes = "overlaypp.filter_scenes:main"
+overlaypp-caption = "overlaypp.caption:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["overlaypp*"]
+
+[dependency-groups]
+dev = [
+    "black>=26.10.0",
+    "isort>=9.0.2",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
